@@ -1,6 +1,8 @@
 import os
+import sys
 from datetime import timedelta
 from pathlib import Path
+
 
 from dotenv import load_dotenv
 
@@ -74,16 +76,36 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME"),
-        "HOST": os.getenv("DB_HOST"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASS"),
-        "PORT": os.getenv("DB_PORT"),
+if "test" in sys.argv:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "test_db/sqlite3",
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "POSTGRES_DB": os.getenv("NAME"),
+            "POSTGRES_USER": "postgres",
+            "POSTGRES_HOST": "db",
+            "PORT": "5432",
+            "POSTGRES_PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        }
+    }
+
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.getenv("DB_NAME"),
+#         "HOST": os.getenv("DB_HOST"),
+#         "USER": os.getenv("DB_USER"),
+#         "PASSWORD": os.getenv("DB_PASS"),
+#         "PORT": os.getenv("DB_PORT"),
+#     }
+# }
 
 
 
