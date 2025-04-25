@@ -15,6 +15,11 @@ services:
     restart: on-failure
     expose:
       - "6379"
+    healthcheck:
+     test: [ "CMD-SHELL", "redis-cli ping | grep PONG" ]
+     interval: 10s
+     timeout: 5s
+     retries: 5
 
   db:
     image: postgres:16-alpine
