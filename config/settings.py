@@ -87,7 +87,7 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "POSTGRES_DB": os.getenv("POSTGRES_DB"),
+            "NAME": os.getenv("POSTGRES_DB"),
             "POSTGRES_USER": "postgres",
             "POSTGRES_HOST": "db",
             "PORT": "5432",
