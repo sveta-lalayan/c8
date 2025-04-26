@@ -87,7 +87,7 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "POSTGRES_DB": os.getenv("NAME"),
+            "POSTGRES_DB": os.getenv("POSTGRES_DB"),
             "POSTGRES_USER": "postgres",
             "POSTGRES_HOST": "db",
             "PORT": "5432",
@@ -98,8 +98,6 @@ else:
 
 
 
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
